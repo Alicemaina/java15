@@ -4,11 +4,11 @@ import org.sql2o.*;
 
 public class StylistTest {
 
-  // @Rule
-  // public DatabaseRule database = new DatabaseRule();
+  @Rule
+  public DatabaseRule database = new DatabaseRule();
 
   @Test
   public void all_emptyAtFirst() {
-    assertEquals(Stylist.all().size(), 0);
+    assertEquals(0, Stylist.all().size());
   }
 }
