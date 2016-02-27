@@ -11,4 +11,11 @@ public class StylistTest {
   public void all_emptyAtFirst() {
     assertEquals(0, Stylist.all().size());
   }
+
+  @Test
+  public void equalsOverride_returnsTrueIfNamesAreTheSameString_true() {
+    Stylist firstStylist = new Stylist("Tyler");
+    Stylist secondStylist = new Stylist("Tyler");
+    assertTrue(firstStylist.equals(secondStylist));
+  }
 }
