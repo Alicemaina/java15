@@ -16,9 +16,20 @@ public class Stylist {
 
   //read all stylists from database
   public static List<Stylist> all() {
-    try (Connection con = DB.sql2o.open()) {
+    try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM stylists";
       return con.createQuery(sql).executeAndFetch(Stylist.class);
+    }
+  }
+
+  //save a stylist to the database
+  public void save() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO stylists (name) VALUES (:name)";
+      this.id = (int) con.createQuery(sql, true)
+        .addParameter("name", this.name)
+        .executeUpdate()
+        .getKey();
     }
   }
 
