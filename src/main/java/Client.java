@@ -19,6 +19,10 @@ public class Client {
     return id;
   }
 
+  public void setStylistID(int stylist_id) {
+    stylist_id = stylist_id;
+  }
+
   //read all clients from database
   public static List<Client> all() {
     try(Connection con = DB.sql2o.open()) {
@@ -45,6 +49,18 @@ public class Client {
       return con.createQuery(sql)
         .addParameter("id", id)
         .executeAndFetchFirst(Client.class);
+    }
+  }
+
+  //update client in database
+  public void update() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE clients SET name = :name, stylist_id = :stylist_id WHERE id = :id";
+      con.createQuery(sql)
+        .addParameter("id", this.id)
+        .addParameter("name", this.name)
+        .addParameter("stylist_id", this.stylist_id)
+        .executeUpdate();
     }
   }
 

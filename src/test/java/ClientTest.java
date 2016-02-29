@@ -37,4 +37,13 @@ public class ClientTest {
     Client savedClient = Client.find(testClient2.getID());
     assertTrue(savedClient.getName().equals("Kris"));
   }
+
+  @Test
+  public void setStylistID_assignsSpecificStylistToClient_true() {
+    Client testClient = new Client("Tyler");
+    testClient.save();
+    testClient.setStylistID(1);
+    testClient.update();
+    assertTrue(Client.all().get(0).equals(testClient));
+  }
 }
