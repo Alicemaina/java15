@@ -23,6 +23,10 @@ public class Client {
     stylist_id = stylist_id;
   }
 
+  public int getStylistID() {
+    return stylist_id;
+  }
+
   //read all clients from database
   public static List<Client> all() {
     try(Connection con = DB.sql2o.open()) {
