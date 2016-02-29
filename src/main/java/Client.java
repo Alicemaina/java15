@@ -53,7 +53,7 @@ public class Client {
   //retrieves client from database
   public static Client find(int id) {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT id, name FROM clients WHERE id=:id";
+      String sql = "SELECT id, name, stylist_id FROM clients WHERE id=:id";
       return con.createQuery(sql)
         .addParameter("id", id)
         .executeAndFetchFirst(Client.class);
