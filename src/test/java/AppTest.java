@@ -1,6 +1,5 @@
 import org.fluentlenium.adapter.FluentTest;
-import org.junit.ClassRule;
-import org.junit.Test;
+import org.junit.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,11 +16,17 @@ public class AppTest extends FluentTest {
   @ClassRule
   public static ServerRule server = new ServerRule();
 
-  // @Test
-  // public void rootTest() {
-  //     goTo("http://localhost:4567/");
-  //     assertThat(pageSource()).contains("Text on page");
-  // }
+
+  @Rule
+  public DatabaseRule database = new DatabaseRule();
+
+  @Test
+  public void rootTest() {
+      goTo("http://localhost:4567/");
+      assertThat(pageSource()).contains("Hair Salon Database");
+  }
+
+
   // @Test
   // public void isALeapYear() {
   //   goTo("http://localhost:4567");
