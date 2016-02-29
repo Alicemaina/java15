@@ -15,6 +15,10 @@ public class Client {
     return name;
   }
 
+  public void setName(String newName) {
+    name = newName;
+  }
+
   public int getID() {
     return id;
   }

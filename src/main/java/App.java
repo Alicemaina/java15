@@ -46,12 +46,47 @@ public class App {
       newClient.save();
       newClient.setStylistID(stylistID);
       newClient.update();
-      
+
       model.put("clients", Client.all());
       model.put("stylists", Stylist.all());
       model.put("template", "templates/new-client.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/client/:id", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/client.vtl");
+
+      Client client = Client.find(Integer.parseInt(request.params(":id")));
+      //this line causing 500 error
+      String stylistName = Stylist.find(client.getStylistID()).getName();
+      //
+
+      model.put("clients", Client.all());
+      model.put("stylists", Stylist.all());
+      model.put("client", client);
+      model.put("stylistName", stylistName);
+
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/client/:id", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/client.vtl");
+
+      Client client = Client.find(Integer.parseInt(request.params(":id")));
+      client.setName(request.queryParams("client"));
+      client.setStylistID(Integer.parseInt(request.queryParams("stylist")));
+      client.update();
+
+      Client updatedClient = Client.find(Integer.parseInt(request.params(":id")));
+      String stylistName = Stylist.find(updatedClient.getStylistID()).getName();
+      model.put("clients", Client.all());
+      model.put("stylists", Stylist.all());
+      model.put("client", updatedClient);
+      model.put("stylistName", stylistName);
+
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
   }
 }
