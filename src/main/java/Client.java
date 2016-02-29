@@ -19,8 +19,8 @@ public class Client {
     return id;
   }
 
-  public void setStylistID(int stylist_id) {
-    stylist_id = stylist_id;
+  public void setStylistID(int stylistID) {
+    stylist_id = stylistID;
   }
 
   public int getStylistID() {
@@ -65,6 +65,16 @@ public class Client {
         .addParameter("name", this.name)
         .addParameter("stylist_id", this.stylist_id)
         .executeUpdate();
+    }
+  }
+
+  //find client by stylist_id
+  public static List<Client> findByStylist(int stylistID) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM clients WHERE stylist_id= :stylist_id";
+      return con.createQuery(sql)
+        .addParameter("stylist_id", stylistID)
+        .executeAndFetch(Client.class);
     }
   }
 

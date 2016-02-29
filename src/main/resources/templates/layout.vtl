@@ -21,7 +21,7 @@
               <select id="stylist" name="stylist" class="form-control" type="text" onchange="this.form.submit();">
                 <option selected="true" disabled="disabled">Choose a Stylist</option>
                 #foreach($stylist in $stylists)
-                <option value="$stylist.getId()">$stylist.getType()</option>
+                <option value="$stylist.getID()">$stylist.getName()</option>
                 #end
               </select>
             </div>
