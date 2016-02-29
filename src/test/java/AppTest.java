@@ -26,12 +26,28 @@ public class AppTest extends FluentTest {
       assertThat(pageSource()).contains("Hair Salon Database");
   }
 
+  @Test
+  public void clients_AreDisplayed() {
+    Client testClient1 = new Client("John Smith");
+    Client testClient2 = new Client("Jane Doe");
+    testClient1.save();
+    testClient2.save();
+    String indexPath = "http://localhost:4567/";
+    goTo(indexPath);
+    assertThat(pageSource()).contains("John Smith");
+    assertThat(pageSource()).contains("Jane Doe");
+  }
 
   // @Test
-  // public void isALeapYear() {
-  //   goTo("http://localhost:4567");
-  //   fill("#year").with("2004");
-  //   submit(".btn");
-  //   assertThat(pageSource()).contains("Correct response");
+  // public void clients_CanBeAdded() {
+  //   Stylists stylist1 = new Stylists("Tyler");
+  //   stylist1.save();
+  //   String indexPath = "http://localhost:4567/";
+  //   String addRestoPath = "http://localhost:4567/new-client";
+  //   goTo(addRestoPath);
+  //   fill("#client").with("Jim Frizzle");
+  //   click("option",withText("Tyler"));
+  //   click("#submit-client");
+  //   assertThat(pageSource()).contains("Jim Frizzle");
   // }
-} // end IntegrationTest
+}
