@@ -2,39 +2,39 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import org.sql2o.*;
 
-public class StylistTest {
+public class ClientTest {
 
   @Rule
   public DatabaseRule database = new DatabaseRule();
 
   @Test
   public void all_emptyAtFirst() {
-    assertEquals(0, Stylist.all().size());
+    assertEquals(0, Client.all().size());
   }
 
   @Test
   public void equalsOverride_returnsTrueIfNamesAreTheSameString_true() {
-    Stylist firstStylist = new Stylist("Tyler");
-    Stylist secondStylist = new Stylist("Tyler");
-    assertTrue(firstStylist.equals(secondStylist));
+    Client firstClient = new Client("Tyler");
+    Client secondClient = new Client("Tyler");
+    assertTrue(firstClient.equals(secondClient));
   }
 
   @Test
-  public void save_savesStylistToTheDatabase_true() {
-    Stylist testStylist = new Stylist("Tyler");
-    testStylist.save();
-    assertTrue(Stylist.all().get(0).equals(testStylist));
+  public void save_savesClientToTheDatabase_true() {
+    Client testClient = new Client("Tyler");
+    testClient.save();
+    assertTrue(Client.all().get(0).equals(testClient));
   }
 
   @Test
-  public void find_returnsCorrectStylist_true() {
-    Stylist testStylist1 = new Stylist("Tyler");
-    Stylist testStylist2 = new Stylist("Kris");
-    Stylist testStylist3 = new Stylist("Jon");
-    testStylist1.save();
-    testStylist2.save();
-    testStylist3.save();
-    Stylist savedStylist = Stylist.find(testStylist2.getID());
-    assertTrue(savedStylist.getName().equals("Kris"));
+  public void find_returnsCorrectClient_true() {
+    Client testClient1 = new Client("Tyler");
+    Client testClient2 = new Client("Kris");
+    Client testClient3 = new Client("Jon");
+    testClient1.save();
+    testClient2.save();
+    testClient3.save();
+    Client savedClient = Client.find(testClient2.getID());
+    assertTrue(savedClient.getName().equals("Kris"));
   }
 }
