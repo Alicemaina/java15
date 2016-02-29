@@ -14,6 +14,10 @@ public class Stylist {
     return name;
   }
 
+  public int getID() {
+    return id;
+  }
+
   //read all stylists from database
   public static List<Stylist> all() {
     try(Connection con = DB.sql2o.open()) {
@@ -22,7 +26,7 @@ public class Stylist {
     }
   }
 
-  //save a stylist to the database
+  //save stylist to database
   public void save() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO stylists (name) VALUES (:name)";
@@ -30,6 +34,16 @@ public class Stylist {
         .addParameter("name", this.name)
         .executeUpdate()
         .getKey();
+    }
+  }
+
+  //retrieves stylist from database
+  public static Stylist find(int id) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT id, name FROM stylists WHERE id=:id";
+      return con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Stylist.class);
     }
   }
 

@@ -26,15 +26,15 @@ public class StylistTest {
     assertTrue(Stylist.all().get(0).equals(testStylist));
   }
 
-  // @Test
-  // public void find_returnsCorrectStylist_true() {
-  //   Stylist testStylist1 = new Stylist("Tyler");
-  //   Stylist testStylist2 = new Stylist("Kris");
-  //   Stylist testStylist3 = new Stylist("Jon");
-  //   testStylist.save();
-  //   testStylist.save();
-  //   testStylist.save();
-  //   Stylist savedStylist = Stylist.find(testStylist2.getID());
-  //   assertTrue(testStylist2.equals(savedStylist));
-  // }
+  @Test
+  public void find_returnsCorrectStylist_true() {
+    Stylist testStylist1 = new Stylist("Tyler");
+    Stylist testStylist2 = new Stylist("Kris");
+    Stylist testStylist3 = new Stylist("Jon");
+    testStylist1.save();
+    testStylist2.save();
+    testStylist3.save();
+    Stylist savedStylist = Stylist.find(testStylist2.getID());
+    assertTrue(savedStylist.getName().equals("Kris"));
+  }
 }
