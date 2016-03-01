@@ -38,16 +38,30 @@ public class AppTest extends FluentTest {
     assertThat(pageSource()).contains("Jane Doe");
   }
 
-  // @Test
-  // public void clients_CanBeAdded() {
-  //   Stylists stylist1 = new Stylists("Tyler");
-  //   stylist1.save();
-  //   String indexPath = "http://localhost:4567/";
-  //   String addRestoPath = "http://localhost:4567/new-client";
-  //   goTo(addRestoPath);
-  //   fill("#client").with("Jim Frizzle");
-  //   click("option",withText("Tyler"));
-  //   click("#submit-client");
-  //   assertThat(pageSource()).contains("Jim Frizzle");
-  // }
+  @Test
+  public void clients_CanBeAdded() {
+    Stylist stylist1 = new Stylist("Tyler");
+    stylist1.save();
+    String indexPath = "http://localhost:4567/";
+    String addClientPath = "http://localhost:4567/new-client";
+    goTo(addClientPath);
+    fill("#client").with("Jim Frizzle");
+    click("option",withText("Tyler"));
+    click("#submit-client");
+    assertThat(pageSource()).contains("Jim Frizzle");
+  }
+
+  @Test
+  public void find_stylistsByClient_stylistName() {
+    Stylist stylist1 = new Stylist("Tyler");
+    stylist1.save();
+    String indexPath = "http://localhost:4567/";
+    String addClientPath = "http://localhost:4567/new-client";
+    goTo(addClientPath);
+    fill("#client").with("Jim Frizzle");
+    click("option",withText("Tyler"));
+    click("#submit-client");
+    click("a", withText("Jim Frizzle"));
+    assertThat(pageSource()).contains("Tyler");
+  }
 }
